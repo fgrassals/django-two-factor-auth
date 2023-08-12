@@ -183,7 +183,7 @@ class LoginView(RedirectURLMixin, IdempotentSessionWizardView):
             return response
 
         # If the user does not have a device.
-        elif OTPRequiredMixin.is_otp_view(self.request.GET.get('next')):
+        elif OTPRequiredMixin.is_otp_view(self.request.GET.get('next')) or OTPRequiredMixin.is_otp_view(redirect_to):
             if self.request.GET.get('next'):
                 self.request.session['next'] = self.get_success_url()
             return redirect('two_factor:setup')
